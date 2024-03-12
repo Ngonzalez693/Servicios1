@@ -1,0 +1,1 @@
+{"basePackage":"co.com.gonzalez.microservice.resolveEnigmaApi","configPackage":"co.com.gonzalez.microservice.resolveEnigmaApi.config","apiPackage":"co.com.gonzalez.microservice.resolveEnigmaApi.api","modelPackage":"co.com.gonzalez.microservice.resolveEnigmaApi.model","groupId":"co.com.gonzalez.service.resolveEnigmaApi","artifactId":"resolve-enigma-api2"}
