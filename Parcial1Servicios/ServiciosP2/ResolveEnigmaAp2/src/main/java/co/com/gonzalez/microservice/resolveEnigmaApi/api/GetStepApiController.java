@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -78,6 +79,11 @@ public class GetStepApiController implements GetStepApi {
     	else {
     		return "Respuesta no válida";
     	}
+    }
+    
+    @GetMapping("/getNewStep")
+    public ResponseEntity<String> getStepSimple() {
+        return new ResponseEntity<>("step 2: Poner la jirafa adentro ", HttpStatus.OK);
     }
     
 }
