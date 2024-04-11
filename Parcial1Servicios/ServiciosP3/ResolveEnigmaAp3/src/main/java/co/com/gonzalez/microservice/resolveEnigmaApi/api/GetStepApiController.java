@@ -46,39 +46,19 @@ public class GetStepApiController implements GetStepApi {
     }
 
     public ResponseEntity<List<JsonApiBodyResponseSuccess>> getStep(@ApiParam(value = "request body get enigma step", required = true) @Valid @RequestBody JsonApiBodyRequest body) {
-        List<GetEnigmaRequest> enigmas = body.getData();
+        List<GetEnigmaRequest> enigma = body.getData();
+        GetEnigmaStepResponse enigmaStepResponse = new GetEnigmaStepResponse();
+
+        enigmaStepResponse.setHeader(enigma.get(0).getHeader());
+        enigmaStepResponse.setAnswer("Paso 3: Cerrar la puerta");
+
+        JsonApiBodyResponseSuccess responseBody = new JsonApiBodyResponseSuccess();
+        responseBody.addDataItem(enigmaStepResponse);
+        
         List<JsonApiBodyResponseSuccess> responseList = new ArrayList<>();
-
-        for (GetEnigmaRequest enigma : enigmas) {
-            
-            Header header = enigma.getHeader();
-            String id = header.getId();
-            String type = header.getType();
-            String enigmaQuestion = enigma.getStep();
-
-            String solution = solveEnigma(enigmaQuestion);
-
-            
-            GetEnigmaStepResponse enigmaStepResponse = new GetEnigmaStepResponse();
-            enigmaStepResponse.setId(id);
-            enigmaStepResponse.setType(type);
-            enigmaStepResponse.setSolution(solution);
-
-            JsonApiBodyResponseSuccess responseBody = new JsonApiBodyResponseSuccess();
-            responseBody.addDataItem(enigmaStepResponse);
-            responseList.add(responseBody);
-        }
+        responseList.add(responseBody);
 
         return new ResponseEntity<>(responseList, HttpStatus.OK);
-    }
-    
-    private String solveEnigma(String enigmaQuestion) {
-    	if("3".equals(enigmaQuestion)){
-        	return "Cerrar la puerta";
-    	}
-    	else {
-    		return "Respuesta no válida";
-    	}
     }
     
     @GetMapping("/getNewStep")
